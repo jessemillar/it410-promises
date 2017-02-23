@@ -37,8 +37,8 @@ module.exports.readDirFiles = function(directoryPath) {
 			if (err) {
 				reject(err);
 			} else {
-				for each (var file in files) {
-					contents.push(readFile(resolvedPath(directoryPath, file)));
+				for (var i = 0; i < files.length; i++) {
+					contents.push(readFile(resolvedPath(directoryPath, files[i])));
 				}
 
 				resolve(contents);
