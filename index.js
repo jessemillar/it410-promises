@@ -30,21 +30,13 @@ module.exports.readDir = function(directoryPath) {
 };
 
 module.exports.readDirFiles = function(directoryPath) {
-	return new Promise(function(resolve, reject) {
-		fs.readdir(directoryPath, function(err, files) {
-			var contents = [];
+	var allContents = [];
 
-			if (err) {
-				reject(err);
-			} else {
-				for (var i = 0; i < files.length; i++) {
-					contents.push(module.exports.readFile(module.exports.resolvedPath(directoryPath, files[i])));
-				}
+	return module.exports.readDir(directoryPath).then(function(allFiles) {
+		allFiles.forEach(function(fileName) {
+			allContents.push(module.exports.readFile(module.exports.resolvedPath(directoryPath, fileName)));
+		})
 
-				Promise.all(promises).then(function() {
-					resolve(contents);
-				})
-			}
-		});
+		return Promise.all(allContents);
 	})
-};
+}
