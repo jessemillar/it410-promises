@@ -6,7 +6,7 @@ module.exports.resolvedPath = function(directoryPath, fileName) {
 };
 
 module.exports.readFile = function(fileName) {
-	fs.readFile(fileName, 'utf8', function(err, res) {
+	return fs.readFile(fileName, 'utf8').then(function(err, res) {
 		res = JSON.parse(res);
 	});
 };
