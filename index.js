@@ -30,5 +30,19 @@ module.exports.readDir = function(directoryPath) {
 };
 
 module.exports.readDirFiles = function(directoryPath) {
-	return null;
+	return new Promise(function(resolve, reject) {
+		fs.readdir(directoryPath, function(err, files) {
+			var contents = [];
+
+			if (err) {
+				reject(err);
+			} else {
+				for each(file in files) {
+					contents.push(readFile(resolvedPath(directoryPath, file)));
+				}
+
+				resolve(contents);
+			}
+		});
+	})
 };
