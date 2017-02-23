@@ -18,7 +18,15 @@ module.exports.readFile = function(fileName) {
 };
 
 module.exports.readDir = function(directoryPath) {
-	return null;
+	return new Promise(function(resolve, reject) {
+		fs.readdir(directoryPath, function(err, files) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(files);
+			}
+		});
+	})
 };
 
 module.exports.readDirFiles = function(directoryPath) {
