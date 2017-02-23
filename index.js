@@ -1,14 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-var resolvedPath = function(directoryPath, fileName) {
+module.exports.resolvedPath = function(directoryPath, fileName) {
+	console.log(path.resolve(directoryPath, fileName));
 	return path.resolve(directoryPath, fileName);
 };
 
-module.exports = resolvedPath;
-
-var readFile = function(filename, callback) {
-	fs.readFile(filename, 'utf8', function(err, res) {
+module.exports.readFile = function(fileName, callback) {
+	fs.readFile(fileName, 'utf8', function(err, res) {
 		if (err) return callback(err);
 
 		try {
@@ -21,16 +20,10 @@ var readFile = function(filename, callback) {
 	});
 };
 
-module.exports = readFile;
-
-var readDir = function() {
+module.exports.readDir = function() {
 	return null;
 };
 
-module.exports = readDir;
-
-var readDirFiles = function() {
+module.exports.readDirFiles = function() {
 	return null;
 };
-
-module.exports = readDirFiles;
