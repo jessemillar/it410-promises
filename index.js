@@ -6,9 +6,15 @@ module.exports.resolvedPath = function(directoryPath, fileName) {
 };
 
 module.exports.readFile = function(fileName) {
-	return fs.readFile(fileName, 'utf8').then(function(res) {
-		return JSON.parse(res);
-	});
+	return new Promise(function(resolve, reject) {
+		fs.readFile(fileName, 'utf8', function(err, data) {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(data);
+			}
+		});
+	})
 };
 
 module.exports.readDir = function(directoryPath) {
