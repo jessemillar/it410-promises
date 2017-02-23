@@ -41,7 +41,9 @@ module.exports.readDirFiles = function(directoryPath) {
 					contents.push(module.exports.readFile(module.exports.resolvedPath(directoryPath, files[i])));
 				}
 
-				resolve(contents);
+				Promise.all(promises).then(function() {
+					resolve(contents);
+				})
 			}
 		});
 	})
